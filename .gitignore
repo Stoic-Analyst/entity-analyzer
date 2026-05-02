@@ -3,3 +3,5 @@
 __pycache__/
 *.pyc
 *.pyo
+!matching_file.xlsx
+!output.xlsx
