@@ -229,13 +229,13 @@ def perform_matching(client_df, db_df):
         match_name, score, idx = process.extractOne(
             entity,
             candidate_entities,
-            scorer=fuzz.token_sort_ratio
+            scorer=fuzz.token_set_ratio
         )
 
         true_index = candidate_indices[idx]
         best_match = db_df.iloc[true_index]
 
-        if score >= 85:
+        if score >= 65:
             result = [best_match['Company ID'], best_match['Company Name'],
                       best_match['Entity Name'], best_match['Entity ID'],
                       "Fuzzy Match", "", score]
