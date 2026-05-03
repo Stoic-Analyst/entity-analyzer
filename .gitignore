@@ -5,3 +5,4 @@ __pycache__/
 *.pyo
 !matching_file.xlsx
 !output.xlsx
+!ent analyzer.xlsm
