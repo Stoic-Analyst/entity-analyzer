@@ -64,9 +64,18 @@ Save the documents/files in a folder titled "Entity Analyzer"
  cd "C:\Users\YourName\Documents\Entity Analyzer"
  
  RECURRING STEP
+
+In the sheet titled "matching_file", save your client data in sheet1 and databse data in sheet2
  
  3. Next line run:
  
  python excel_match.py
  
  Open output file createdin folder  to view result
+
+For further analysis user the "Ent Analyzer" macro file.
+
+Instructions:-
+1. In hierarchal order press buttons Exact,Normalize and Fuzzy in sheet1 after pasting the client data in sheet1 and database data in sheet2 (Coulmn order my vary from excel file conected to python script)
+2. Use export button in sheet 1 to export the result 
+3. Create a new tab in exported sheet and paste database data there
