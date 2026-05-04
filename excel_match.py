@@ -14,14 +14,27 @@ def normalize(text):
 
     text = unidecode(text).lower()
 
-    prefixes = ["state of", "republic of"]
+    prefixes = ["university of","school of","state of", "republic of","kingdom of", "government of","region of","city of","county of","province of", "canton of","donotuse","do not use","dnu"]
     for p in prefixes:
         if text.startswith(p):
             text = text.replace(p, "")
 
-    suffixes = ["ltd", "inc", "corp", "limited", "co", ":"]
+    suffixes = ["B.V.","S.A.","SICAV","saint","st","intl","bros","brothers","cap","capital","limited","ltd","limited liability company","llc","incorporated","inc","corporation","corp","organisation","organization","org","companies","cos","limited partnership","lp","public limited company","plc","proprietary","pty","ag","GESELLSCHAFTMITBESCHRAENKTERHAFTUNG","gmbh","ab","sa","cie","scarl","cia","bhd","tbk","pt", "limited", "co", ":","(dnu)","dnu","- dnu","donotuse","do not use"]
     for s in suffixes:
         text = text.replace(s, "")
+
+    noisewords = ["group", "holdings", "holding", "global", "international", "services"]
+    for n in noisewords:
+        text = text.replace(n, "")
+
+
+        text = text.replace("&amp;", "and")
+
+    replaces = ["&"]  
+    for r in replaces:
+        text = text.replace(r,"and")
+
+    
 
     text = re.sub(r'[^a-z0-9\s]', '', text)
     text = re.sub(r'\s+', ' ', text).strip()
@@ -231,6 +244,11 @@ def perform_matching(client_df, db_df):
             candidate_entities,
             scorer=fuzz.token_set_ratio
         )
+
+        
+        # ✅ Convert score to 2 decimal places here
+         #score = float(f"{score:.2f}")
+        score = round(score,2)    
 
         true_index = candidate_indices[idx]
         best_match = db_df.iloc[true_index]
