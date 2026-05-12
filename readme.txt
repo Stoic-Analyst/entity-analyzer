@@ -2,17 +2,21 @@ In an excel sheet there are two tabs/sheets.
 Name of the first sheet is Client Data where three columns have been provided by the client:
 Column A: Company Name
 Column B: Entity Name
+column C: Identifier
 Name of the second sheet is Database Data where three columns have been populated from sql database:
 Column A: Company Name
 Column B: Company ID
 Column C: Entity Name
+Column D: Entity ID
+Column E: Identifier
 python does the following:
 1. Does a 5 tier matching system in hierarchal order.
-a. First tier is exact company + entity names match of data in sheet 1 with sheet 2
+a. First tier is exact company + entity names  match of data in sheet 1 with sheet 2
 b. Second tier is for the entities not matched in tier 1, an exact first lookup of entity name in sheet 1 with entity name in sheet 2, also calculate count of exact matches in sheet 2
 c. Third tier is for entites not matched in first two tiers, a "Normalise" function that trims spaces,removes prefixes like "State Of" and "Republic of", and Suffixes like "Ltd:" or "Inc" etc, makes names lower case to make it case insensitive, removes special characters and accents on alphbets and ASCII characters from entity names on both sheets and then perform a match at company plus entity level.
 d. Fourth tier is for entites not matched in first three tiers, a "Normalise" function that trims spaces,removes prefixes like "State Of" and "Republic of", and Suffixes like "Ltd:" or "Inc" etc, makes names lower case to make it case insensitive, removes special characters and accents on alphbets and ASCII characters from entity names on both sheets and then find the first match at entity level and calculate the match count in case there are multiple matches
 d. Fifth tier is for entites not matched in first four tiers, perform a fuzzy lookup similar to power query fuzzy lookup at 85% similarity score.
+note:- a new tier added at to of the hierarchy:  exact company + entity names + identifier  making it 6 tier
 2.After storing all of this in a scripting dictionary, please populate the following columns in Sheet1:
 a. Column C: Database Company ID
 b. Column D: Database Company Name
@@ -34,7 +38,7 @@ f. Column H: Similarity Score (For Fuzzy lookup)
 
 ✅ 🚀 Summary
 This solution gives you:
-✔ Structured 5-tier logic
+✔ Structured 6-tier logic
 ✔ High-performance matching
 ✔ Excel-integrated workflow
 ✔ Button-driven execution
